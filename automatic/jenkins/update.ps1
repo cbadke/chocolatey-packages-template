@@ -15,6 +15,7 @@ function global:au_SearchReplace {
 function global:au_GetLatest {
 
     $location = (iex "$localPath/curl.exe -sI '$url'") | Where-Object {$_ -like "Location: *"}
+    $location = $location.Substring(10)
 
     $filename = $location.Substring($location.LastIndexOf("/") + 1)
     $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'

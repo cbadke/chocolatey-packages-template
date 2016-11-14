@@ -3,7 +3,7 @@
   <metadata>
     <id>jenkins</id>
     <title>Jenkins CI</title>
-    <version>2.19.2</version>
+    <version></version>
     <owners>Curtis Badke</owners>
     <packageSourceUrl>https://github.com/cbadke/jenkins-chocolatey-package</packageSourceUrl>
     <summary>Jenkins is an application that monitors executions of repeated jobs, such as building a software project or jobs run by cron.</summary>
