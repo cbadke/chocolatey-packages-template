@@ -16,7 +16,7 @@ environment:
   au_push: true
 
   # Github token to commit pushed packages to repository
-  github_user_repo: {github_user}/{repository}
+  github_user_repo: cbadke/jenkins-chocolatey-package
   github_api_key:
     secure: gdbQmO7V5IKt0m6lJgDcgvzFdIlKTa+Y6eanJRUyIYoF6HD59Wr4nXksvP+rPRSK
 
