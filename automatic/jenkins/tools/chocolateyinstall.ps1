@@ -6,6 +6,7 @@ $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
 $url = ''
 $checkSum = ''
+$checkSumMsi = ''
 
 $filename = Join-Path $toolsDir ($url.Substring($url.LastIndexOf("/") + 1))
 
@@ -13,8 +14,6 @@ Get-ChocolateyWebFile -PackageName $packageName -FileFullPath $filename -Url $ur
 Get-ChocolateyUnzip -FileFullPath $fileName -Destination $toolsDir -PackageName $packageName
 
 $msiPath = Join-Path $toolsDir 'jenkins.msi'
-
-$checkSumMsi = (Get-FileHash $msiPath).Hash
 
 $packageArgs = @{
   packageName   = $packageName
