@@ -4,9 +4,9 @@ $ErrorActionPreference = 'Stop'; # stop on all errors
 $packageName= 'jenkins' # arbitrary name for the package, used in messages
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
-$url = ''
-$checkSum = ''
-$checkSumMsi = ''
+$url = 'http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.73.3.zip'
+$checkSum = '18c5ffbd96e60ff9708bcbf1437f4b740246e45d278aa6f23bc69f5d77c54862'
+$checkSumMsi = '1324ddd7333e9a0dfbd1240f0f45de76e827657f5c5a0ce4f7a18e16b8092198'
 
 $filename = Join-Path $toolsDir ($url.Substring($url.LastIndexOf("/") + 1))
 
