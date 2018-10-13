@@ -16,10 +16,9 @@ environment:
   au_push: true
 
   # Github token to commit pushed packages to repository
-  github_user_repo: cbadke/jenkins-chocolatey-package
+  github_user_repo: johnypony3/jenkins-chocolatey-package
   github_api_key:
     secure: gdbQmO7V5IKt0m6lJgDcgvzFdIlKTa+Y6eanJRUyIYoF6HD59Wr4nXksvP+rPRSK
-
 
   # Mail credentials - for error notifications
   mail_user:
@@ -32,7 +31,7 @@ environment:
 
   # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
   # Optional, leave empty to create anonymous gist
-  gist_id: 563ce377109a3a13f8a0b96ce98491c2
+  gist_id: f0a0f5e2d08d17aae5d8c8aafc35a2e9
 
   # Chocolatey API key - to push updated packages
   api_key:

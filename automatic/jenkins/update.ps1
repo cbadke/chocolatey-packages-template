@@ -21,10 +21,32 @@ function global:au_SearchReplace {
         }
      }
 }
-Write-Output "test0"
+
 function global:au_GetLatest {
-    Write-Output "test1"
-    return "bingo"
+
+
+    $request = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -ErrorAction Ignore
+
+    if($request.StatusDescription -eq 'found')
+    {
+       $location = $request.Headers.Location
+    }
+    $filename = $location.Substring($location.LastIndexOf("/") + 1)
+    $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
+
+    $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
+    (Invoke-webrequest -URI $checkSumUrl).Content
+
+    $zipPath = "$localPath/jenkins.zip"
+    $msiPath = "$localPath/jenkins.msi"
+    rm -force -ErrorAction Ignore $zipPath
+    rm -force -ErrorAction Ignore $msiPath
+    Invoke-WebRequest $location -OutFile $zipPath
+    Unzip $zipPath $localPath
+
+    $checksummsi = (Get-FileHash $msiPath).Hash
+    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; MsiCheckSum32 = $checksummsi; CheckSumType = 'sha256' }
+    return $Latest
 }
 
 update -NoCheckUrl -ChecksumFor none
