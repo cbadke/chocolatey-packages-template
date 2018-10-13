@@ -15,8 +15,8 @@ function Unzip
 function global:au_SearchReplace {
     @{
         'tools\chocolateyinstall.ps1' = @{
-            "(^[$]url\s*=\s*)('.*')"       = "`$1'$($Latest.URL)'"
-            "(^[$]checksum\s*=\s*)('.*')"  = "`$1'$($Latest.Checksum32)'"
+            "(url\s*=\s*)('.*')" = "`$1'$($Latest.URL)'"
+            "(checksum\s*=\s*)('.*')" = "`$1'$($Latest.CheckSum32)'"
         }
      }
 }
@@ -37,8 +37,8 @@ function global:au_GetLatest {
     $shaPath = "$localPath/$filename.sha256"
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
-    Invoke-WebRequest -Uri $checkSumUrl -OutFile "$localPath/$filename.sha256"
-    $checksum = (Get-Content "$localPath/$filename.sha256" -Raw).Split(' ')[0]
+    Invoke-WebRequest -Uri $checkSumUrl -OutFile $shaPath
+    $checksum = (Get-Content $shaPath -Raw).Split(' ')[0]
 
     #$checksum = (Invoke-WebRequest -uri http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.121.3.zip.sha256).content
 
