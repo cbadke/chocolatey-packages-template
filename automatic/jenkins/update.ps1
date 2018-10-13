@@ -46,11 +46,13 @@ function global:au_GetLatest {
     $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
 
     $shaPath = "$localPath/$filename.sha256"
+    $msiPath = "$localPath/jenkins.msi"
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
     Invoke-WebRequest -Uri $checkSumUrl -OutFile $shaPath
     $checksum = (Get-Content $shaPath -Raw).Split(' ')[0]
     rm -force -ErrorAction Ignore $shaPath
+    rm -force -ErrorAction Ignore $msiPath
 
     $Latest = @{ Url32 = $location; FileName = $filename; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
     return $Latest
