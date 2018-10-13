@@ -36,8 +36,7 @@ function global:au_GetLatest {
     $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
-    Invoke-WebRequest -Uri $checkSumUrl -OutFile $filename.sha256
-    $checksum = (Get-Content $filename.sha256 -Raw).Split(' ')[0]
+    $checksum = (Invoke-WebRequest -Uri $checkSumUrl -OutFile $filename.sha256).rawcontent.Split([Environment]::NewLine)[18].split(' ')[0]
 
     $zipPath = "$localPath/jenkins.zip"
     $msiPath = "$localPath/jenkins.msi"
