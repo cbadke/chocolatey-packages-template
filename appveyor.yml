@@ -16,31 +16,21 @@ environment:
   au_push: true
 
   # Github token to commit pushed packages to repository
-  github_user_repo: cbadke/jenkins-chocolatey-package
-  github_api_key:
-    secure: gdbQmO7V5IKt0m6lJgDcgvzFdIlKTa+Y6eanJRUyIYoF6HD59Wr4nXksvP+rPRSK
+  github_user_repo: johnypony3/jenkins-chocolatey-package
+  github_api_key: $GITHUB_API
 
-
-  # Mail credentials - for error notifications
-  mail_user:
-    secure: H7cLAqoD1IqqY3mN8E68z+k2H/LtqdNIDdp2DrjHMSY=
-  mail_pass:
-    secure: VQtEWaF0sr/Wk+2D2OSf+JMBkIyc24fs5a1bCbJZ2MNJaPQD/Ma5zHq42p0H0WX40isRlJmvKhiVKRlFIwRmZqSy35OMo46FMaAC5NlJg4c=
-  mail_server: smtp.gmail.com
-  mail_port: 587
-  mail_enablessl: true
 
   # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
   # Optional, leave empty to create anonymous gist
-  gist_id: 563ce377109a3a13f8a0b96ce98491c2
+  gist_id: f0a0f5e2d08d17aae5d8c8aafc35a2e9
 
   # Chocolatey API key - to push updated packages
   api_key:
-    secure: /a3mgK80gwQ5PEKWUvB6ro2BiN0ZhJyryZQ4ccv8UbvkKnk38fthILNz4EJdd8c5
+    secure: $CHOCO_KEY
 
 init:
-- git config --global user.email "jenkins.choco@gmail.com"
-- git config --global user.name "Chocolatey"
+- git config --global user.email "johnypony3@theemm.com"
+- git config --global user.name "johnypony3"
 - git config --global core.safecrlf false
 
 install:
