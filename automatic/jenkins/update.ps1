@@ -50,4 +50,3 @@ function global:au_GetLatest {
 }
 
 update -NoCheckUrl -ChecksumFor none
-Push-Package
