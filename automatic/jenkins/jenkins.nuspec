@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>jenkins</id>
-    <version>2.121.3.20181013</version>
+    <version>1.0.0</version>
     <title>Jenkins CI</title>
     <authors>The Jenkins Team</authors>
     <owners>johnypony3</owners>

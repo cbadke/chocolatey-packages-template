@@ -19,11 +19,6 @@ function global:au_SearchReplace {
             "(checksum\s*=\s*)('.*')" = "`$1'$($Latest.CheckSum32)'"
         }
      }
-     @{
-         'jenkins.nuspec' = @{
-             "<version>(.+?)<\/version>" = "`$1'$($Latest.Version)'"
-         }
-      }
 }
 
 function global:au_BeforeUpdate() {
@@ -51,7 +46,7 @@ function global:au_GetLatest {
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
     Invoke-WebRequest -Uri $checkSumUrl -OutFile $shaPath
     $checksum = (Get-Content $shaPath -Raw).Split(' ')[0]
-    
+
     rm -force -ErrorAction Ignore $shaPath
     rm -force -ErrorAction Ignore $msiPath
 

@@ -9,8 +9,8 @@ $null = New-Item -ItemType Directory -Path $tempDir
 $zipArgs = @{
     packageName     = $env:ChocolateyPackageName
     unzipLocation   = $tempDir
-    url             = 'jenkins.zip'
-    checksum        = '819e3a76e019054d9a7c62f93f7e9d97'
+    url             = 'http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.121.3.zip'
+    checksum        = 'FC2D5133810D438191BF173BB8B7892904E243ABF1AE5D73F0BE7CC4A4FDB62C'
     checksumType    = 'sha256'
 }
 
