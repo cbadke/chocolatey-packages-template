@@ -14,7 +14,9 @@ environment:
   # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
   au_version:
   au_push: true
-
+  au_NoPlugins: true
+  au_Force: true
+  
   # Github token to commit pushed packages to repository
   github_user_repo: johnypony3/jenkins-chocolatey-package
   github_api_key: $GITHUB_API
