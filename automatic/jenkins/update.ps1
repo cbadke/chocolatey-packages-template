@@ -50,7 +50,7 @@ function global:au_GetLatest {
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
     Invoke-WebRequest -Uri $checkSumUrl -OutFile $shaPath
-    $checksum = (Get-Content $shaPath -Raw).Split(' ')[0
+    $checksum = (Get-Content $shaPath -Raw).Split(' ')[0]
     
     rm -force -ErrorAction Ignore $shaPath
     rm -force -ErrorAction Ignore $msiPath
