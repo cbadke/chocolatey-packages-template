@@ -1,91 +1,63 @@
-﻿## Summary
-How do I create packages? See https://chocolatey.org/docs/create-packages
+[![][ButlerImage]][website]
 
-If you are submitting packages to the community feed (https://chocolatey.org)
-always try to ensure you have read, understood and adhere to the create
-packages wiki link above.
+# About
+In a nutshell, Jenkins is the leading open-source automation server.
+Built with Java, it provides over 1000 plugins to support automating virtually anything,
+so that humans can actually spend their time doing things machines cannot.
 
-## Automatic Packaging Updates?
-Consider making this package an automatic package, for the best 
-maintainability over time. Read up at https://chocolatey.org/docs/automatic-packages
+# What to Use Jenkins for and When to Use It
 
-## Shim Generation
-Any executables you include in the package or download (but don't call 
-install against using the built-in functions) will be automatically shimmed.
+Use Jenkins to automate your development workflow so you can focus on work that matters most. Jenkins is commonly used for:
 
-This means those executables will automatically be included on the path.
-Shim generation runs whether the package is self-contained or uses automation 
-scripts. 
+- Building projects
+- Running tests to detect bugs and other issues as soon as they are introduced
+- Static code analysis
+- Deployment
 
-By default, these are considered console applications.
+Execute repetitive tasks, save time, and optimize your development process with Jenkins.
 
-If the application is a GUI, you should create an empty file next to the exe 
-named 'name.exe.gui' e.g. 'bob.exe' would need a file named 'bob.exe.gui'.
-See https://chocolatey.org/docs/create-packages#how-do-i-set-up-shims-for-applications-that-have-a-gui
+# Downloads
+Non-source downloads such as WAR files and several Linux packages can be found on our [Mirrors].
 
-If you want to ignore the executable, create an empty file next to the exe 
-named 'name.exe.ignore' e.g. 'bob.exe' would need a file named 
-'bob.exe.ignore'. 
-See https://chocolatey.org/docs/create-packages#how-do-i-exclude-executables-from-getting-shims
+# Source
+Our latest and greatest source of Jenkins can be found on [GitHub]. Fork us!
 
-## Self-Contained? 
-If you have a self-contained package, you can remove the automation scripts 
-entirely and just include the executables, they will automatically get shimmed, 
-which puts them on the path. Ensure you have the legal right to distribute 
-the application though. See https://chocolatey.org/docs/legal. 
+# Contributing to Jenkins
+Follow [contributing][contributing] file.
 
-You should read up on the Shim Generation section to familiarize yourself 
-on what to do with GUI applications and/or ignoring shims.
+# News and Website
+All information about Jenkins can be found on our [website]. Follow us on Twitter [@jenkinsci].
 
-## Automation Scripts
-You have a powerful use of Chocolatey, as you are using PowerShell. So you
-can do just about anything you need. Choco has some very handy built-in 
-functions that you can use, these are sometimes called the helpers.
+# License
+Jenkins is **licensed** under the **[MIT License]**. The terms of the license are as follows:
 
-### Built-In Functions
-https://chocolatey.org/docs/helpers-reference
+    The MIT License (MIT)
 
-A note about a couple:
-* Get-BinRoot - this is a horribly named function that doesn't do what new folks think it does. It gets you the 'tools' root, which by default is set to 'c:\tools', not the chocolateyInstall bin folder - see https://chocolatey.org/docs/helpers-get-tools-location
-* Install-BinFile - used for non-exe files - executables are automatically shimmed... - see https://chocolatey.org/docs/helpers-install-bin-file
-* Uninstall-BinFile - used for non-exe files - executables are automatically shimmed - see https://chocolatey.org/docs/helpers-uninstall-bin-file
+    Copyright (c) 2004 Kohsuke Kawaguchi, Sun Microsystems Inc., and a number of other contributors.
 
-### Getting package specific information
-Use the package parameters pattern - see https://chocolatey.org/docs/how-to-parse-package-parameters-argument
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
-### Need to mount an ISO?
-https://chocolatey.org/docs/how-to-mount-an-iso-in-chocolatey-package
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
 
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
 
-### Environment Variables
-Chocolatey makes a number of environment variables available (You can access any of these with $env:TheVariableNameBelow):
-
- * TEMP = Overridden to the CacheLocation, but may be the same as the original TEMP folder
- * ChocolateyInstall = Top level folder where Chocolatey is installed
- * chocolateyPackageName = The name of the package, equivalent to the id in the nuspec (0.9.9+)
- * chocolateyPackageVersion = The version of the package, equivalent to the version in the nuspec (0.9.9+)
- * chocolateyPackageFolder = The top level location of the package folder
-
-#### Advanced Environment Variables
-The following are more advanced settings:
-
- * chocolateyPackageParameters = (0.9.8.22+)
- * CHOCOLATEY_VERSION = The version of Choco you normally see. Use if you are 'lighting' things up based on choco version. (0.9.9+)
-    - Otherwise take a dependency on the specific version you need. 
- * chocolateyForceX86 = If available and set to 'true', then user has requested 32bit version. (0.9.9+)
-    - Automatically handled in built in Choco functions. 
- * OS_PLATFORM = Like Windows, OSX, Linux. (0.9.9+)
- * OS_VERSION = The version of OS, like 6.1 something something for Windows. (0.9.9+)
- * OS_NAME = The reported name of the OS. (0.9.9+)
- * IS_PROCESSELEVATED = Is the process elevated? (0.9.9+)
- 
-#### Experimental Environment Variables
-The following are experimental or use not recommended:
-
- * OS_IS64BIT = This may not return correctly - it may depend on the process the app is running under (0.9.9+)
- * CHOCOLATEY_VERSION_PRODUCT = the version of Choco that may match CHOCOLATEY_VERSION but may be different (0.9.9+)
-    - it's based on git describe
- * IS_ADMIN = Is the user an administrator? But doesn't tell you if the process is elevated. (0.9.9+)
- * chocolateyInstallOverride = Not for use in package automation scripts. (0.9.9+)
- * chocolateyInstallArguments = the installer arguments meant for the native installer. You should use chocolateyPackageParameters intead. (0.9.9+)
-
+[ButlerImage]: https://jenkins.io/sites/default/files/jenkins_logo.png
+[MIT License]: https://github.com/jenkinsci/jenkins/raw/master/LICENSE.txt
+[Mirrors]: http://mirrors.jenkins-ci.org
+[GitHub]: https://github.com/jenkinsci/jenkins
+[website]: https://jenkins.io/
+[@jenkinsci]: https://twitter.com/jenkinsci
+[wiki]: https://wiki.jenkins-ci.org
+[contributing]: https://github.com/jenkinsci/jenkins/blob/master/CONTRIBUTING.md
