@@ -8,7 +8,7 @@
     <owners>johnypony3</owners>
     <licenseUrl>https://raw.github.com/jenkinsci/jenkins/master/LICENSE.txt</licenseUrl>
     <projectUrl>http://jenkins-ci.org</projectUrl>
-    <iconUrl>https://wiki.jenkins.io/download/attachments/2916393/logo.png?version=1&modificationDate=1302753947000&api=v2</iconUrl>
+    <iconUrl>https://wiki.jenkins.io/download/attachments/2916393/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Jenkins is an award-winning application that monitors executions of repeated jobs, such as building a software project or jobs run by cron. Among those things, current Jenkins focuses on the following two jobs:
     1. Building/testing software projects continuously, just like CruiseControl or DamageControl. In a nutshell, Jenkins provides an easy-to-use so-called continuous integration system, making it easier for developers to integrate changes to the project, and making it easier for users to obtain a fresh build. The automated, continuous build increases the productivity.

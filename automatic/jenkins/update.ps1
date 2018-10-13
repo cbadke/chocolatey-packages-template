@@ -45,10 +45,13 @@ function global:au_GetLatest {
     Invoke-WebRequest $location -OutFile $zipPath
     Unzip $zipPath $localPath
 
+    Write-Host "zipPath: $zipPath"
+    Write-Host "msiPath: $msiPath"
+    Write-Host "version: $version"
 
     $checksummsi = (Get-FileHash $msiPath).Hash
     $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; MsiCheckSum32 = $checksummsi; CheckSumType = 'sha256' }
     return $Latest
 }
 
-update -NoCheckUrl -ChecksumFor none
+update -NoCheckChocoVersion -NoCheckUrl -ChecksumFor none
