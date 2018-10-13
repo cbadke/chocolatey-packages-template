@@ -32,6 +32,7 @@ function global:au_GetLatest {
        $location = $request.Headers.Location
     }
     $filename = $location.Substring($location.LastIndexOf("/") + 1)
+    $filename = "jenkins-2.121.3.zip"
     $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
