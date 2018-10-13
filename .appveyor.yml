@@ -14,21 +14,11 @@ environment:
   # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
   au_version:
   au_push: true
-  NoChocoPackage: false
 
   # Github token to commit pushed packages to repository
   github_user_repo: johnypony3/jenkins-chocolatey-package
-  github_api_key:
-    secure: gdbQmO7V5IKt0m6lJgDcgvzFdIlKTa+Y6eanJRUyIYoF6HD59Wr4nXksvP+rPRSK
+  github_api_key: $GITHUB_API
 
-  # Mail credentials - for error notifications
-  mail_user:
-    secure: H7cLAqoD1IqqY3mN8E68z+k2H/LtqdNIDdp2DrjHMSY=
-  mail_pass:
-    secure: VQtEWaF0sr/Wk+2D2OSf+JMBkIyc24fs5a1bCbJZ2MNJaPQD/Ma5zHq42p0H0WX40isRlJmvKhiVKRlFIwRmZqSy35OMo46FMaAC5NlJg4c=
-  mail_server: smtp.gmail.com
-  mail_port: 587
-  mail_enablessl: true
 
   # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
   # Optional, leave empty to create anonymous gist
@@ -36,11 +26,11 @@ environment:
 
   # Chocolatey API key - to push updated packages
   api_key:
-    secure: /a3mgK80gwQ5PEKWUvB6ro2BiN0ZhJyryZQ4ccv8UbvkKnk38fthILNz4EJdd8c5
+    secure: $CHOCO_KEY
 
 init:
-- git config --global user.email "jenkins.choco@gmail.com"
-- git config --global user.name "Chocolatey"
+- git config --global user.email "johnypony3@theemm.com"
+- git config --global user.name "johnypony3"
 - git config --global core.safecrlf false
 
 install:
@@ -65,7 +55,7 @@ build_script:
                     Write-Host ("{0}`n{1}`n" -f ('-'*60), "PACKAGE: $package")
                     $package_dir = ls -recurse | ? { $_.Name -eq "$package.nuspec"} | select -First 1 | % Directory
                     if (!$package_dir) { Write-Warning "Can't find package '$package'"; continue }
-                    pushd $package_dir; choco pack; Push-Package; popd
+                    #pushd $package_dir; choco pack; Push-Package; popd
                 }
                 return
             }
