@@ -61,13 +61,11 @@ artifacts:
 - path: update_info.xml
 - path: Update-AUPackages.md
 - path: au_temp.zip
-
-#notifications:
-#- provider: Email
-#  to: $(mail_user)
-#  on_build_success: false
-#  on_build_failure: true
-#  on_build_status_changed: true
-
-#on_finish:
-#- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+- path: '**\*.nupkg'
+  name: nupkg
+- path: '**\*.nuspec'
+  name: nuspec
+- path: '**\.version'
+  name: version
+- path: '**\chocolateyinstall.ps1'
+  name: chocolateyinstall
