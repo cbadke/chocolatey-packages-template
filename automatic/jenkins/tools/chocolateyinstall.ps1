@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop' # stop on all errors
+﻿$ErrorActionPreference = 'Stop' # stop on all errors
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
 do {
@@ -9,8 +9,8 @@ $null = New-Item -ItemType Directory -Path $tempDir
 $zipArgs = @{
     packageName     = $env:ChocolateyPackageName
     unzipLocation   = $tempDir
-    url             = 'http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.138.1.zip'
-    checksum        = '6FABD2260693AC3323AFCCFDDAF7936111D84969A1BCA119422AC6AEBCE6314C'
+    url             = 'jenkins.zip'
+    checksum        = '819e3a76e019054d9a7c62f93f7e9d97'
     checksumType    = 'sha256'
 }
 

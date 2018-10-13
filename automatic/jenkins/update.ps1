@@ -15,10 +15,23 @@ function Unzip
 function global:au_SearchReplace {
     @{
         'tools\chocolateyinstall.ps1' = @{
-            "(url\s*=\s*)('.*')" = "`$1'$($Latest.URL)'"
+            "(url\s*=\s*)('.*')" = "`$1'$($Latest.Url32)'"
             "(checksum\s*=\s*)('.*')" = "`$1'$($Latest.CheckSum32)'"
         }
      }
+     @{
+         'jenkins.nuspec' = @{
+             "<version>(.+?)<\/version>" = "`$1'$($Latest.Version)'"
+         }
+      }
+}
+
+function global:au_BeforeUpdate() {
+   $Latest.Checksum32 = Get-RemoteChecksum $Latest.Url32
+   Get-RemoteFiles -Purge -NoSuffix $Latest.Url32
+   $zipPath = "$localPath/jenkins.zip"
+   rm -force -ErrorAction Ignore $zipPath
+   Unzip $zipPath $localPath
 }
 
 function global:au_GetLatest {
@@ -28,27 +41,22 @@ function global:au_GetLatest {
     {
        $location = $request.Headers.Location
     }
+
+    $location = "http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.121.3.zip"
     $filename = $location.Substring($location.LastIndexOf("/") + 1)
-    $filename = "jenkins-2.121.3.zip"
     $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
 
-    $zipPath = "$localPath/jenkins.zip"
     $shaPath = "$localPath/$filename.sha256"
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
     Invoke-WebRequest -Uri $checkSumUrl -OutFile $shaPath
     $checksum = (Get-Content $shaPath -Raw).Split(' ')[0]
-
-    rm -force -ErrorAction Ignore $zipPath
     rm -force -ErrorAction Ignore $shaPath
-
-    Invoke-WebRequest $location -OutFile $zipPath
-    Unzip $zipPath $localPath
 
     Write-Host "checksum: $checksum"
     Write-Host "version: $version"
 
-    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
+    $Latest = @{ Url32 = $location; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
     return $Latest
 }
 
