@@ -65,7 +65,7 @@ artifacts:
   name: nupkg
 - path: '**\*.nuspec'
   name: nuspec
-- path: '**\.version'
-  name: version
 - path: '**\chocolateyinstall.ps1'
   name: chocolateyinstall
+- path: '**\*.zip'
+  name: zip
