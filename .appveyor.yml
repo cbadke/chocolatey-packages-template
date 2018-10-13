@@ -1,5 +1,3 @@
-# AU template: https://github.com/majkinetor/au-packages-template
-
 version: '{build}'
 max_jobs: 1
 image: WMF 5
@@ -11,24 +9,16 @@ branches:
 #  verbosity: minimal
 
 environment:
-  # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
   au_version:
   au_push: true
   au_NoPlugins: true
   au_Force: true
-  
-  # Github token to commit pushed packages to repository
-  github_user_repo: johnypony3/jenkins-chocolatey-package
-  github_api_key: $GITHUB_API
-
-
-  # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
-  # Optional, leave empty to create anonymous gist
   gist_id: f0a0f5e2d08d17aae5d8c8aafc35a2e9
-
-  # Chocolatey API key - to push updated packages
+  github_user_repo: johnypony3/jenkins-chocolatey-package
+  github_api_key:
+    secure: YESJ9JpWKRVk7FTJCFTH9flB+FgHq37sriJBUzh33pBB4BkG3EvahOGyiYEGyrzx
   api_key:
-    secure: $CHOCO_KEY
+    secure: eGr2Vfz7tsmjLPZZpLoCfZVEdgntDtZ0O2wbf0LiNOJwLtmQuZwRZe2hfysGQVT8
 
 init:
 - git config --global user.email "johnypony3@theemm.com"
