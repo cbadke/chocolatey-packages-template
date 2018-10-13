@@ -28,7 +28,7 @@ function global:au_SearchReplace {
 
 function global:au_BeforeUpdate() {
    $Latest.Checksum32 = Get-RemoteChecksum $Latest.Url32
-   Get-RemoteFiles -Purge -NoSuffix $Latest.Url32
+   Get-RemoteFiles -Purge -NoSuffix
    $zipPath = "$localPath/jenkins.zip"
    rm -force -ErrorAction Ignore $zipPath
    Unzip $zipPath $localPath
