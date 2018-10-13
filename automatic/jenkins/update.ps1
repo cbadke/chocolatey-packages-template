@@ -27,8 +27,9 @@ function global:au_SearchReplace {
 }
 
 function global:au_BeforeUpdate() {
+   $filename2 = $Latest.FileName
    Get-RemoteFiles -Purge -NoSuffix
-   $zipPath = "$localPath\tools\$($Latest.FileName)"
+   $zipPath = "$localPath\tools\$filename2"
    Unzip $zipPath $localPath
 }
 
