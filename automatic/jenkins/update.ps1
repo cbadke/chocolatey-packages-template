@@ -21,7 +21,7 @@ function global:au_SearchReplace {
         }
      }
 }
-
+Write-Output "test0"
 function global:au_GetLatest {
     Write-Output "test1"
 
