@@ -30,7 +30,7 @@ function global:au_GetLatest {
        $location = $request.Headers.Location
     }
     $filename = $location.Substring($location.LastIndexOf("/") + 1)
-    $filename = "jenkins-2.121.3.zip"
+    #$filename = "jenkins-2.121.3.zip"
     $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
 
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
@@ -52,8 +52,9 @@ function global:au_GetLatest {
     Write-Host "checksum: $checksum"
     Write-Host "version: $version"
 
-    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
+    $checksummsi = (Get-FileHash $msiPath).Hash
+    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; MsiCheckSum32 = $checksummsi; CheckSumType = 'sha256' }
     return $Latest
 }
 
-update -NoCheckChocoVersion -NoCheckUrl -ChecksumFor all -Force
+update -NoCheckChocoVersion -NoCheckUrl -ChecksumFor none -Force
