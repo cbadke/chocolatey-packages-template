@@ -27,9 +27,8 @@ function global:au_SearchReplace {
 }
 
 function global:au_BeforeUpdate() {
-   $version = $Latest.Version
    Get-RemoteFiles -Purge -NoSuffix
-   $zipPath = "$localPath\tools\jenkins-$version.zip"
+   $zipPath = "$localPath\tools\$($Latest.FileName)"
    Unzip $zipPath $localPath
 }
 
@@ -52,7 +51,7 @@ function global:au_GetLatest {
     $checksum = (Get-Content $shaPath -Raw).Split(' ')[0]
     rm -force -ErrorAction Ignore $shaPath
 
-    $Latest = @{ Url32 = $location; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
+    $Latest = @{ Url32 = $location; FileName = $filename; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
     return $Latest
 }
 
