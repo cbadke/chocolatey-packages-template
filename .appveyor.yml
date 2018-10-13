@@ -54,7 +54,6 @@ install:
 build_script:
 - ps: |
     if ( ($Env:APPVEYOR_SCHEDULED_BUILD -ne 'true') -and ($Env:APPVEYOR_FORCED_BUILD -ne 'true') ) {
-        Write-Output "test1"
         switch -regex ($Env:APPVEYOR_REPO_COMMIT_MESSAGE)
         {
             '\[AU (.+?)\]'   { $forced = $Matches[1] }
