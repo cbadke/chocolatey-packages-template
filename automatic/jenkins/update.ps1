@@ -52,7 +52,6 @@ function global:au_GetLatest {
     Write-Host "checksum: $checksum"
     Write-Host "version: $version"
 
-    $checksummsi = (Get-FileHash $msiPath).Hash
     $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
     return $Latest
 }
