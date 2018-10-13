@@ -24,29 +24,7 @@ function global:au_SearchReplace {
 Write-Output "test0"
 function global:au_GetLatest {
     Write-Output "test1"
-
-    $location = (iex "$localPath/curl.exe -sI '$url'") | Where-Object {$_ -like "Location: *"}
-    $location = $location.Substring(10)
-
-    Write-Output "test2"
-    $filename = $location.Substring($location.LastIndexOf("/") + 1)
-    $version = ($filename -split '-|\.' | select -Last 3 -skip 1) -join '.'
-
-    Write-Output "test3"
-    $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
-    $checksum = (iex "$localPath/curl.exe '$checkSumUrl'").Split(' ')[0]
-
-    $zipPath = "$localPath/jenkins.zip"
-    $msiPath = "$localPath/jenkins.msi"
-    rm -force -ErrorAction Ignore $zipPath
-    rm -force -ErrorAction Ignore $msiPath
-    Invoke-WebRequest $location -OutFile $zipPath
-    Unzip $zipPath $localPath
-
-    $checksummsi = (Get-FileHash $msiPath).Hash
-
-    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; MsiCheckSum32 = $checksummsi; CheckSumType = 'sha256' }
-    return $Latest
+    return "bingo"
 }
 
 update -NoCheckUrl -ChecksumFor none
