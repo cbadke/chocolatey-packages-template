@@ -23,8 +23,6 @@ function global:au_SearchReplace {
 }
 
 function global:au_GetLatest {
-
-
     $request = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -ErrorAction Ignore
 
     if($request.StatusDescription -eq 'found')
@@ -38,24 +36,24 @@ function global:au_GetLatest {
     $checkSumUrl = "http://mirrors.jenkins-ci.org/windows-stable/$filename.sha256"
     Invoke-WebRequest -Uri $checkSumUrl -OutFile "$localPath/$filename.sha256"
     $checksum = (Get-Content "$localPath/$filename.sha256" -Raw).Split(' ')[0]
-    
-    #$checksum = (Invoke-WebRequest -uri http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.121.3.zip.sha256).co ntent
+
+    #$checksum = (Invoke-WebRequest -uri http://mirrors.jenkins-ci.org/windows-stable/jenkins-2.121.3.zip.sha256).content
 
 
     $zipPath = "$localPath/jenkins.zip"
     $msiPath = "$localPath/jenkins.msi"
+
     rm -force -ErrorAction Ignore $zipPath
     rm -force -ErrorAction Ignore $msiPath
+
     Invoke-WebRequest $location -OutFile $zipPath
     Unzip $zipPath $localPath
 
-    Write-Host "zipPath: $zipPath"
-    Write-Host "msiPath: $msiPath"
+    Write-Host "checksum: $checksum"
     Write-Host "version: $version"
 
-    $checksummsi = (Get-FileHash $msiPath).Hash
-    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; MsiCheckSum32 = $checksummsi; CheckSumType = 'sha256' }
+    $Latest = @{ URL = $location; Version = $version; CheckSum32 = $checkSum; CheckSumType = 'sha256' }
     return $Latest
 }
 
-update -NoCheckChocoVersion -NoCheckUrl -ChecksumFor none -Force
+update -NoCheckChocoVersion -NoCheckUrl -ChecksumFor all -Force
