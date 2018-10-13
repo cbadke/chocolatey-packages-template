@@ -44,7 +44,7 @@ function global:au_GetLatest {
 
     rm -force -ErrorAction Ignore $zipPath
     rm -force -ErrorAction Ignore $msiPath
-    rm -force -ErrorAction Ignore shaPath
+    rm -force -ErrorAction Ignore $shaPath
 
     Invoke-WebRequest $location -OutFile $zipPath
     Unzip $zipPath $localPath
